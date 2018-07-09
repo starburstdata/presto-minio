@@ -1,0 +1,7 @@
+*.iml
+*~
+.DS_Store
+.idea
+minio/config/*
+minio/data/.minio.sys/*
+minio/data/customer-data-orc

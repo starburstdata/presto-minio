@@ -1,0 +1,29 @@
+version: '3'
+services:
+  presto:
+    hostname: presto
+    image: 'starburstdata/presto:latest'
+    container_name: presto
+    ports:
+      - '8080:8080'
+    volumes: 
+      - './presto/minio.properties:/usr/lib/presto/etc/catalog/minio.properties'
+  hadoop:
+    hostname: hadoop-master
+    image: 'prestodb/cdh5.13-hive:latest'
+    container_name: hadoop-master
+    volumes:
+      - './hadoop/core-site.xml:/etc/hadoop/conf/core-site.xml'
+  minio:
+    hostname: minio
+    image: minio/minio
+    container_name: minio
+    ports:
+      - '9000:9000'
+    volumes:
+      - './minio/data/:/data'
+      - './minio/config:/root/.minio'
+    environment:
+      MINIO_ACCESS_KEY: V42FCGRVMK24JJ8DHUYG
+      MINIO_SECRET_KEY: bKhWxVF3kQoLY9kFmt91l+tDrEoZjqnWXzY9Eza
+    command: server /data
