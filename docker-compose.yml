@@ -8,12 +8,15 @@ services:
       - '8080:8080'
     volumes: 
       - './presto/minio.properties:/usr/lib/presto/etc/catalog/minio.properties'
+      - './hadoop/lib/json-serde-1.3.8-jar-with-dependencies.jar:/usr/lib/presto/lib/plugin/hive-hadoop2/json-serde-1.3.8-jar-with-dependencies.jar'
   hadoop:
     hostname: hadoop-master
     image: 'prestodb/cdh5.13-hive:latest'
     container_name: hadoop-master
     volumes:
       - './hadoop/core-site.xml:/etc/hadoop/conf/core-site.xml'
+      - './hadoop/lib/json-udf-1.3.8-jar-with-dependencies.jar:/usr/lib/hive/lib/json-udf-1.3.8-jar-with-dependencies.jar'
+      - './hadoop/lib/json-serde-1.3.8-jar-with-dependencies.jar:/usr/lib/hive/lib/json-serde-1.3.8-jar-with-dependencies.jar'
   minio:
     hostname: minio
     image: minio/minio

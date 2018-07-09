@@ -65,5 +65,3 @@ presto:default> select * from customer_orc;
  5  | Bob   | Jones 
  6  | Phil  | Brune
 ```
-
-
