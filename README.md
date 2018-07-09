@@ -26,9 +26,7 @@ Run `docker exec -it hadoop-master /bin/bash`.
 [root@hadoop-master /]# su - hdfs
 -bash-4.1$ hive
 hive> use default;
-hive> create external table customer_text(id string, fname string, lname string) 
-	 > ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
-	 > STORED AS TEXTFILE location 's3a://customer-data-text/';
+hive> create external table customer_text(id string, fname string, lname string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' STORED AS TEXTFILE location 's3a://customer-data-text/';
 hive> select * from customer_text;
 ```
 
@@ -52,7 +50,7 @@ presto:default> select * from customer_text;
 (2 rows)
 ```
 
-Next, let's create a new table via Presto and copy the CSV data into ORC format.
+Next, let's create a new table via Presto and copy the CSV data into ORC format. Before you do that, make a new bucket in Minio named `customer-data-orc`.
 
 ```
 presto:default> create table customer_orc(id varchar,fname varchar,lname varchar) with (format = 'ORC', external_location = 's3a://customer-data-orc/');
