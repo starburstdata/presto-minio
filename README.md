@@ -9,7 +9,7 @@ Run `docker-compose up -d`
 You can view the Minio Browser at `http://127.0.0.1:9000/`
 You can view the Presto WebUI at `http://127.0.0.1:8080/`
 
-Use `docker exec -it presto java -jar /presto-cli.jar` to connect to Presto.
+Use `docker exec -it presto presto-cli` to connect to Presto.
 
 # Stopping
 
@@ -30,12 +30,12 @@ hive> create external table customer_text(id string, fname string, lname string)
 hive> select * from customer_text;
 ```
 
-Next let's query the data from Presto. Run `docker exec -it presto java -jar /presto-cli.jar`
+Next let's query the data from Presto. Run `docker exec -it presto presto-cli`
 
 ```
 presto> use minio.default;
 presto:default> show tables;
-
+	
 presto:default> show tables;
      Table     
 ---------------  
